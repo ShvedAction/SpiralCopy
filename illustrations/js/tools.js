@@ -61,6 +61,25 @@ function tools(){
             tools.speralItterator(n - Math.abs(rotateDirect[0]), m - Math.abs(rotateDirect[1]), callback, [x, y], rotateDirect, countEdgeStep + offset)
         },
 
+        periodicFuncеtions: {
+            miander: (T, w) => {
+                if (w > 0.5)
+                    console.error("Wrong weight of impuls! It should be less or equal 0.5")
+                return x => (x % T - (x % T) % (T - T*w))/ (T - T*w)
+            },
+
+            saw: T => x => Math.abs(Math.abs(x + T/2) % T - T/2) / (T/2),
+
+            obtuseSaw: T =>{
+                const sideMiander = x => tools.periodicFuncеtions.miander(T/2, 0.5)(x + T/4)
+                const topMiander = x => tools.periodicFuncеtions.miander(T, 0.25)(x + T/2)
+
+                const saw = x => tools.periodicFuncеtions.saw(T)(x + T/8)* (T/2) - T/8
+
+                return x => sideMiander(x) * saw(x) + topMiander(x) * T / 4
+            }
+        
+        },
         /*
             calculate circle index
         */
@@ -74,6 +93,7 @@ function tools(){
                 a0 = minDim % 2
                 a1 = 4 + (minDim  % 2) * 4
             }else{
+                //todo: DEBUG IT
                 a0 = (minDim % 2) * (Math.abs(m - n) + 1)
                 a1 = (minDim % 2 + 1) *(Math.abs(m - n) + 1) + 6 * (minDim % 2)
             }
@@ -85,7 +105,29 @@ function tools(){
             calculate cordinates by index for spiral copy problem
         */
         spiralCordinates: (index, n, m) => {
-            //todo:
+            //Now for square only
+            if (n != m)
+                console.error("now for square only")
+
+            const circlIndex  = tools.spiralCircleIndex(index, n, m)
+
+            const widCircle = circlIndex * 2 + n % 2
+
+            const passedCircleElements = n * n - widCircle * widCircle
+
+            const piremetr = widCircle == 1 ?  1 : widCircle * 4 - 4
+
+            const period = piremetr
+
+            const xFunc = tools.periodicFuncеtions.obtuseSaw(period)
+            const yFunc = (t) => tools.periodicFuncеtions.obtuseSaw(period)(t - period/4)
+            
+            return [
+                xFunc(index-passedCircleElements) + (n-widCircle)/2, 
+                yFunc(index-passedCircleElements) + (n-widCircle)/2
+            ]
+
+            //todo: for rectangle
         }
     }
 
