@@ -3,10 +3,10 @@
     padding: 0;
 }
 
-body{
+.wrapper{
     display: flex;
     justify-content: center;
-    margin: 264px 0;
+    margin: 200px 0 0;
 }
 
 #field{
@@ -28,6 +28,23 @@ body{
     width: 40px;
     height: 30px;
     color: #666;
+}
+
+#line{
+    margin: 50px 0 0;
+    display: flex; 
+    flex-direction: row;
+}
+
+#line div{
+    border: 2px solid #999;
+    border-left: none;
+    padding: 5px 10px;
+    color: #666;
+}
+
+#line div:first{
+    border-left: 2px solid #999;
 }
 
 .flashMe{
