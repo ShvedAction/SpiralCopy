@@ -80,6 +80,7 @@ function tools(){
             }
         
         },
+        
         /*
             calculate circle index
         */
@@ -87,18 +88,17 @@ function tools(){
             //index from center
             const i = n * m - 1 - index 
 
-            const minDim = Math.min(n, m)
-            let a0, a1
-            if (m == n){
-                a0 = minDim % 2
-                a1 = 4 + (minDim  % 2) * 4
+            const d = n - m
+
+            //TODO: get rid of this "if"
+            let n1
+            if ( n < m){
+                n1 = (n + 1) % 2 + 1
             }else{
-                //todo: DEBUG IT
-                a0 = (minDim % 2) * (Math.abs(m - n) + 1)
-                a1 = (minDim % 2 + 1) *(Math.abs(m - n) + 1) + 6 * (minDim % 2)
+                n1 = (m + 1) % 2 + 1 + d
             }
 
-            return Math.floor((Math.sqrt(Math.pow(4 - a1, 2) - 16*(a0 - i)) + 4 - a1) / 8) + 1
+            return Math.floor((Math.sqrt(Math.pow(2*n1 - d, 2) - 4*(n1*n1 - n1*d - i)) - 2*n1 + d)/4) + 1
         },
 
         /*
