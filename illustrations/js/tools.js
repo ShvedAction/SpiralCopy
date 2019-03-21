@@ -80,9 +80,9 @@ function tools(){
             }
         
         },
-        
+
         /*
-            calculate circle index
+            calculate the index of a circle by an element index
         */
         spiralCircleIndex: (index, n, m) => {
             //index from center
@@ -98,7 +98,7 @@ function tools(){
                 n1 = (m + 1) % 2 + 1 + d
             }
 
-            return Math.floor((Math.sqrt(Math.pow(2*n1 - d, 2) - 4*(n1*n1 - n1*d - i)) - 2*n1 + d)/4) + 1
+            return Math.floor((Math.sqrt(Math.pow(2*n1 - d, 2) - 4*(n1*n1 - n1*d - i)) - 2*n1 + d)/4) + 2
         },
 
         /*
@@ -111,7 +111,7 @@ function tools(){
 
             const circlIndex  = tools.spiralCircleIndex(index, n, m)
 
-            const widCircle = circlIndex * 2 + n % 2
+            const widCircle = circlIndex * 2 - n % 2
 
             const passedCircleElements = n * n - widCircle * widCircle
 
