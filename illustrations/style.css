@@ -5,8 +5,8 @@
 
 .wrapper{
     display: flex;
-    justify-content: center;
-    margin: 200px 0 0;
+    justify-content: center;    
+    margin: 80px 0;
 }
 
 #field{
@@ -43,13 +43,36 @@
     color: #666;
 }
 
-#line div:first{
+#line :first-child{
     border-left: 2px solid #999;
+    margin-left: 90px;
 }
 
 .flashMe{
     animation-name: cellFlashHighlight;
     animation-duration: 2.5s;
+}
+
+.svgPoint{
+    fill: #666;
+    stroke: #000;
+    stroke-width: 1;
+    r: 4;
+    animation-name: pointFlashHighlight;
+    animation-duration: 1.5s;
+}
+
+@keyframes pointFlashHighlight{
+    from {
+        fill: fuchsia;
+        stroke: aqua;
+        r: 10;
+    }
+    to{
+        fill: #666;
+        stroke: #000;
+        r: 4;
+    }
 }
 
 @keyframes cellFlashHighlight{

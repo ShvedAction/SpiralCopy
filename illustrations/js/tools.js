@@ -23,6 +23,10 @@ function tools(){
             return result
         },
 
+        timeout: (ms) =>{
+            return new Promise(resolve => setTimeout(resolve, ms))
+        }, 
+
         fillMatrixRandoms: matrix => {
             for(const rowIndex in matrix){
                 const row = matrix[rowIndex]
@@ -111,6 +115,7 @@ function tools(){
 
             const circlIndex  = tools.spiralCircleIndex(index, n, m)
 
+            //the width of the current square circle
             const widCircle = circlIndex * 2 - n % 2
 
             const passedCircleElements = n * n - widCircle * widCircle
